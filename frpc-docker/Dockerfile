@@ -17,6 +17,6 @@ RUN make
 FROM alpine:latest
 WORKDIR /frp
 COPY --from=builder2 /frp/bin /frp/bin
-COPY --from=builder2 /frp/conf/frpc.toml /frp/bin/frpc.toml
+COPY --from=builder2 /frp/conf/frpc.toml /etc/frp/frpc.toml
 RUN cat /frp/bin/frpc.toml
-ENTRYPOINT [ "bin/frpc", "-c", "bin/frpc.toml" ]
+ENTRYPOINT [ "bin/frpc", "-c", "/etc/frp/frpc.toml" ]
