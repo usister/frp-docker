@@ -15,7 +15,9 @@ git clone https://github.com/usister/frp-docker.git
 cd frp-docker/frpc-docker  
 sudo docker build -t frpc:latest .
 # Change the ports and the your_config_file_path to your's
-sudo docker run -d -v your_config_file:/etc/frp/frpc.toml frps:latest --network host  
+sudo docker run -d -v your_config_file:/etc/frp/frpc.toml frpc:latest --network host  
 ```
 ## Fully frp toml config reference
 Vist https://gofrp.org/en/docs/  
+## Fully docker run command reference
+Vist https://docs.docker.com/reference/cli/docker/container/run/
