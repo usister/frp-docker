@@ -62,10 +62,15 @@ git clone https://github.com/usister/frp-docker.git
 cd frp-docker/frps-docker  
 sudo docker build -t frps:latest .
 # Generate frps config file
+# You need to change the token, and this token must same as fprc.toml
 sudo mkdir /etc/frp
 sudo bash -c 'cat << EOF > /etc/frp/frps.toml
+# The port on your FRPS server that listens for FRPC connections.
 bindPort = 7000
+# The port on your FRPS server that exposes web server running on the FRPC side.
 vhostHTTPPort = 80
+[[auth]]
+token = change_me
 EOF'
 # Run container
 sudo docker run -p 7000:7000 -p 80:80 -d -v /etc/frp/frps.toml:/etc/frp/frps.toml --restart unless-stopped --name frps  frps:latest
@@ -80,8 +85,12 @@ sudo docker build -t frpc:latest .
 # Generate frps config file
 sudo mkdir /etc/frp
 sudo bash -c 'cat << EOF > /etc/frp/frpc.toml
+# Your FRPS server ip and port
 serverAddr = "x.x.x.x"
 serverPort = 7000
+
+[[auth]]
+token = change_me
 
 [[proxies]]
 name = "web"
@@ -97,6 +106,6 @@ customDomains = ["www.yourdomain2.com"]
 
 EOF'
 # Run container
-# Due to docker network security policy, you need to config frpc container and your web services container in a same network, or config frpc container in host network. This example use host network.
+# Due to docker network security policy, you need to configure FRPC container and your web services container in the same network, or configure FRPC container in host network. This example uses host network.
 sudo docker run -d -v /etc/frp/frpc.toml:/etc/frp/frpc.toml --network host --restart unless-stopped --name frpc frpc:latest
 ```
