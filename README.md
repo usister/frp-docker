@@ -60,8 +60,8 @@ sudo bash -c 'cat << EOF > /etc/frp/frpc.toml
 serverAddr = "x.x.x.x"
 serverPort = 7000
 
-[[auth]]
-token = change_me
+[auth]
+token = "change_me"
 
 [[proxies]]
 name = "web"
