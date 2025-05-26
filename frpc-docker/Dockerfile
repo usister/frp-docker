@@ -5,7 +5,6 @@ wget https://github.com/fatedier/frp/archive/refs/tags/${latest_tag}.tar.gz -O f
 tar -xvf frp-${latest_tag}.tar.gz && \
 rm -rf frp-${latest_tag}.tar.gz && \
 mv /frp* /frp
-RUN ls -al
 
 FROM golang:latest AS builder2
 WORKDIR /frp
