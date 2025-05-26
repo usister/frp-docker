@@ -40,8 +40,8 @@ sudo bash -c 'cat << EOF > /etc/frp/frps.toml
 bindPort = 7000
 # The port on your FRPS server that exposes web server running on the FRPC side.
 vhostHTTPPort = 80
-[[auth]]
-token = change_me
+[auth]
+token = "change_me"
 EOF'
 # Run container
 sudo docker run -p 7000:7000 -p 80:80 -d -v /etc/frp/frps.toml:/etc/frp/frps.toml --restart unless-stopped --name frps  frps:latest
