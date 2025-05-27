@@ -45,6 +45,7 @@ token = "change_me"
 EOF'
 # Run container
 # Because of Docker's network policy, you must either expose all necessary ports or use the host network. Using the host network is recommended.
+# If you use the host network, you need to open the necessary firewall ports.
 # sudo docker run -p 7000:7000 -p 80:80 -d -v /etc/frp/frps.toml:/etc/frp/frps.toml --restart unless-stopped --name frps  frps:latest
 sudo docker run --network host -d -v /etc/frp/frps.toml:/etc/frp/frps.toml --restart unless-stopped --name frps  frps:latest
 ```
