@@ -44,7 +44,9 @@ vhostHTTPPort = 80
 token = "change_me"
 EOF'
 # Run container
-sudo docker run -p 7000:7000 -p 80:80 -d -v /etc/frp/frps.toml:/etc/frp/frps.toml --restart unless-stopped --name frps  frps:latest
+# Because of Docker's network policy, you must either expose all necessary ports or use the host network. Using the host network is recommended.
+# sudo docker run -p 7000:7000 -p 80:80 -d -v /etc/frp/frps.toml:/etc/frp/frps.toml --restart unless-stopped --name frps  frps:latest
+sudo docker run --network host -d -v /etc/frp/frps.toml:/etc/frp/frps.toml --restart unless-stopped --name frps  frps:latest
 ```
 ### Install and configure frpc
 ```shell
